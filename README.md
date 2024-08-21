@@ -1,0 +1,1 @@
+This is the scaffold for all my React projects :)
