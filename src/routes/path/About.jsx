@@ -1,17 +1,13 @@
 import React, {
 } from 'react'
-import aboutClasses from './About.module.scss'
+import classes from './About.module.scss'
+import Footer from '@/routes/components/Root/Footer'
 
 export default function About() {
 
   return (
-    <section className={aboutClasses.app}>
-      <h1>Vite + React</h1>
-      <section className={aboutClasses.card}>
-        <p>
-          About
-        </p>
-      </section>
+    <section className={classes.app}>
+      <Footer />
     </section>
   )
 }
