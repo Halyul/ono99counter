@@ -9,7 +9,7 @@ export default function Counter({
 }) {
 
     return (
-        <section>
+        <section className={classes.counter}>
             {history[history.length - 1]}
         </section>
     )

@@ -11,22 +11,46 @@ export default function Operation({
     handlePrev,
     handleNext,
 }) {
+    const actions = [
+        {
+            name: 'Prev',
+            onClick: handlePrev,
+            disabled: history.length === 1,
+        },
+        {
+            name: 'Reset',
+            onClick: handleReset,
+            disabled: false,
+        },
+        {
+            name: 'Next',
+            onClick: handleNext,
+            disabled: prevHistory.length === 0,
+        },
+        {
+            name: 'TTS',
+            onClick: () => {
+                const msg = new SpeechSynthesisUtterance(history[history.length - 1])
+                window.speechSynthesis.speak(msg)
+            },
+            disabled: false,
+        }
+    ]
 
     return (
-        <section>
-            <button onClick={handleReset}>Reset</button>
-            <button
-                onClick={handlePrev}
-                disabled={history.length === 1}
-                >
-                Prev
-            </button>
-            <button
-                onClick={handleNext}
-                disabled={prevHistory.length === 0}
-                >
-                Next
-            </button>
+        <section className={classes.operation}>
+            {
+                actions.map((action) => (
+                    <button
+                        key={action.name}
+                        onClick={action.onClick}
+                        disabled={action.disabled}
+                        className={classes.btn}
+                    >
+                        {action.name}
+                    </button>
+                ))
+            }
         </section>
     )
 }

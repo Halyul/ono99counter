@@ -1,0 +1,5 @@
+@use "share";
+
+.card-deck {
+    @include share.section();
+}

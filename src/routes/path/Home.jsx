@@ -39,7 +39,7 @@ export default function Home() {
   }, [])
 
   return (
-    <section className={classes.app}>
+    <section className={classes.home}>
       <Counter history={history} onHistoryChange={setHistory} />
       <Operation
         history={history}

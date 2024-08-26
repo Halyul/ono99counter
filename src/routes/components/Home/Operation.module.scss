@@ -1,0 +1,8 @@
+@use "share";
+
+.operation {
+    @include share.section();
+    & {
+        max-width: 25rem;
+    }
+}
