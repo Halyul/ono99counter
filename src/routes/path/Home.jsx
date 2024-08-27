@@ -6,51 +6,77 @@ import CardDeck from '@/routes/components/Home/CardDeck'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
 
+/*
+    Showing turns?
+    Player history (out/win)? -> new card needed
+*/
+
 export default function Home() {
   const [history, setHistory] = useState([0])
   const [prevHistory, setPrevHistory] = useState([])
+  const [isTTSOn, setIsTTSOn] = useState(false)
 
   useEffect(() => {
     console.log('history', history)
     console.log('prevHistory', prevHistory)
   }, [history, prevHistory])
 
+  const handleScoreTTS = useCallback((score) => {
+    if (isTTSOn) {
+      const utterance = new SpeechSynthesisUtterance(score)
+      speechSynthesis.speak(utterance)
+    }
+  }, [isTTSOn])
+
   const handleReset = useCallback(() => {
-    setHistory([0])
+    const newHistory = [0]
+    setHistory(newHistory)
     setPrevHistory([])
-  }, [])
+    handleScoreTTS(newHistory[newHistory.length - 1])
+  }, [handleScoreTTS])
 
   const handlePrev = useCallback(() => {
     setPrevHistory([...prevHistory, history.pop()])
-    setHistory([...history])
-  }, [history, prevHistory])
+    const newHistory = [...history]
+    setHistory(newHistory)
+    handleScoreTTS(newHistory[newHistory.length - 1])
+  }, [handleScoreTTS, history, prevHistory])
 
   const handleNext = useCallback(() => {
-    setHistory([...history, prevHistory.pop()])
+    const newHistory = [...history, prevHistory.pop()]
+    setHistory(newHistory)
     setPrevHistory([...prevHistory])
-  }, [history, prevHistory])
+    handleScoreTTS(newHistory[newHistory.length - 1])
+  }, [handleScoreTTS, history, prevHistory])
 
   const handleCountUp = useCallback((count) => {
-    setHistory(prev => [
-      ...prev,
-      prev[prev.length - 1] + parseInt(count)
-    ])
+    const newHistory = [...history, history[history.length - 1] + parseInt(count)]
+    setHistory(newHistory)
     setPrevHistory([])
-  }, [])
+    handleScoreTTS(newHistory[newHistory.length - 1])
+  }, [handleScoreTTS, history])
+
+  const handleTTSToggle = useCallback(() => {
+    setIsTTSOn(!isTTSOn)
+  }, [isTTSOn])
 
   return (
     <section className={classes.home}>
       <Counter history={history} onHistoryChange={setHistory} />
-      <Operation
-        history={history}
-        prevHistory={prevHistory}
-        handleReset={handleReset}
-        handlePrev={handlePrev}
-        handleNext={handleNext}
-        />
-      <CardDeck
-        handleCountUp={handleCountUp}
-        />
+      <section className={classes.container}>
+        <Operation
+          history={history}
+          prevHistory={prevHistory}
+          handleReset={handleReset}
+          handlePrev={handlePrev}
+          handleNext={handleNext}
+          isTTSOn={isTTSOn}
+          handleTTSToggle={handleTTSToggle}
+          />
+        <CardDeck
+          handleCountUp={handleCountUp}
+          />
+      </section>
     </section>
   )
 }

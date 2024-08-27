@@ -1,23 +1,18 @@
 @mixin section() {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 4rem;
   gap: var(--btn-gap);
-  margin: 0 auto;
-  max-width: 20rem;
 
-  .btn {
-    width: 5rem;
-    height: 5rem;
-  }
+  // .btn {
+  //   height: 5rem;
+  // }
 
-  @media (max-width: 768px) {
-    max-width: 16rem;
-    .btn {
-      width: 4rem;
-      height: 4rem;
-    }
-  }
+  // @media (max-width: 768px) {
+  //   max-width: 16rem;
+  //   .btn {
+  //     width: 4rem;
+  //     height: 4rem;
+  //   }
+  // }
 }

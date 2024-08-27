@@ -2,7 +2,7 @@
 
 .operation {
     @include share.section();
-    & {
-        max-width: 25rem;
+    .tts {
+        grid-column: 1 / 4;
     }
 }
