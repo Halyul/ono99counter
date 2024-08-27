@@ -1,5 +1,5 @@
 import React, {
-    useState
+    useEffect
 } from 'react'
 import PropTypes from 'prop-types'
 import classes from './Operation.module.scss'
@@ -13,7 +13,6 @@ export default function Operation({
     isTTSOn,
     handleTTSToggle,
 }) {
-
     const actions = [
         {
             name: 'Prev',
@@ -38,6 +37,26 @@ export default function Operation({
         }
     ]
 
+    useEffect(() => {
+        function keyUpHandler(e) {
+            if (e.key === 'ArrowLeft') {
+                handlePrev()
+            } else if (e.key === 'ArrowRight') {
+                handleNext()
+            } else if (e.key === 'Space') {
+                handleReset()
+            } else if (e.key === 'Enter') {
+                handleTTSToggle()
+            }
+        }
+
+        document.addEventListener("keyup", keyUpHandler);
+
+        return () => {
+            document.removeEventListener("keyup", keyUpHandler);
+        };
+    }, [handleNext, handlePrev, handleReset, handleTTSToggle]);
+
     return (
         <section className={classes.operation}>
             {
@@ -47,8 +66,6 @@ export default function Operation({
                         onClick={action.onClick}
                         disabled={action.disabled}
                         className={action.className ? action.className : ''}
-                        // onKeyDown={}
-                        // onKeyUp={}
                     >
                         {action.name}
                     </button>

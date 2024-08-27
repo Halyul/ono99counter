@@ -9,21 +9,9 @@ export default function Counter({
 
     return (
         <section className={classes.counter}>
-            {/* <section className={classes.title}>
-                Current Score:
-            </section> */}
             <section className={classes.score}>
                 {history[history.length - 1]}
             </section>
-            {/* <section className={classes.history}>
-                {
-                    history.map((score, index) => (
-                        <span key={index}>
-                            {score}
-                        </span>
-                    ))
-                }
-            </section> */}
         </section>
     )
 }

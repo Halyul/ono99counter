@@ -6,11 +6,6 @@ import CardDeck from '@/routes/components/Home/CardDeck'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
 
-/*
-    Showing turns?
-    Player history (out/win)? -> new card needed
-*/
-
 export default function Home() {
   const [history, setHistory] = useState([0])
   const [prevHistory, setPrevHistory] = useState([])
@@ -36,6 +31,7 @@ export default function Home() {
   }, [handleScoreTTS])
 
   const handlePrev = useCallback(() => {
+    if (history.length === 1) return
     setPrevHistory([...prevHistory, history.pop()])
     const newHistory = [...history]
     setHistory(newHistory)
@@ -43,6 +39,7 @@ export default function Home() {
   }, [handleScoreTTS, history, prevHistory])
 
   const handleNext = useCallback(() => {
+    if (prevHistory.length === 0) return
     const newHistory = [...history, prevHistory.pop()]
     setHistory(newHistory)
     setPrevHistory([...prevHistory])
