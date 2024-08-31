@@ -6,12 +6,25 @@ import classes from './Counter.module.scss'
 export default function Counter({
     history,
 }) {
+    const currentScoreString = history[history.length - 1].toString()
+    const currentScoreAsList = currentScoreString.split('')
 
     return (
-        <section className={classes.counter}>
-            <section className={classes.score}>
-                {history[history.length - 1]}
-            </section>
+        <section
+            className={classes.counter}
+            style={{
+                gridTemplateColumns: `repeat(${currentScoreAsList.length}, 1fr)`
+            }}
+        >
+            {
+                currentScoreAsList.map((item, index) => {
+                    return (
+                        <section key={index} className={classes['counter-item']}>
+                            {item}
+                        </section>
+                    )
+                })
+            }
         </section>
     )
 }

@@ -5,4 +5,10 @@
     padding: 1rem 2rem;
     background-color: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
+
+    .history {
+        @media only screen and (min-width: 100vh) {
+            display: none;
+        }
+    }
 }

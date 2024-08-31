@@ -25,7 +25,10 @@ export default function Header() {
                     <NavLink
                         to={route.path}
                         key={route.path}
-                    >{route.name}</NavLink>
+                        className={classes[route.className]}
+                    >
+                        {route.name}
+                    </NavLink>
                 ))
             }
         </header>

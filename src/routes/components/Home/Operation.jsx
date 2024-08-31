@@ -13,7 +13,7 @@ export default function Operation({
     isTTSOn,
     handleTTSToggle,
 }) {
-    const actions = [
+    const gameControls = [
         {
             name: 'Prev',
             onClick: handlePrev,
@@ -29,12 +29,31 @@ export default function Operation({
             onClick: handleNext,
             disabled: prevHistory.length === 0,
         },
+    ]
+
+    const ttsControls = [
         {
+            type: 'button',
             name: isTTSOn ? 'TTS On' : 'TTS Off',
             onClick: handleTTSToggle,
             disabled: false,
             className: classes.tts,
-        }
+        },
+        {
+            type: 'section',
+            name: 'Language Panel',
+            className: classes['language-panel'],
+        },
+        {
+            type: 'section',
+            name: 'Speed Panel',
+            className: classes['Speed-panel'],
+        },
+        {
+            type: 'section',
+            name: 'Volume Panel',
+            className: classes['volume-panel'],
+        },
     ]
 
     useEffect(() => {
@@ -59,18 +78,38 @@ export default function Operation({
 
     return (
         <section className={classes.operation}>
-            {
-                actions.map((action) => (
-                    <button
-                        key={action.name}
-                        onClick={action.onClick}
-                        disabled={action.disabled}
-                        className={action.className ? action.className : ''}
-                    >
-                        {action.name}
-                    </button>
-                ))
-            }
+            <section className={classes['game-control']}>
+                {
+                    gameControls.map((action) => (
+                        <button
+                            key={action.name}
+                            onClick={action.onClick}
+                            disabled={action.disabled}
+                            className={action.className ? action.className : ''}
+                        >
+                            {action.name}
+                        </button>
+                    ))
+                }
+            </section>
+            <section className={classes['tts-control']}>
+                {
+                    ttsControls.map((action) => (
+                        action.type === 'section' ?
+                            <section key={action.name} className={action.className ? action.className : ''}>
+                                {action.name}
+                            </section> :
+                            <button
+                                key={action.name}
+                                onClick={action.onClick}
+                                disabled={action.disabled}
+                                className={action.className ? action.className : ''}
+                            >
+                                {action.name}
+                            </button>
+                    ))
+                }
+            </section>
         </section>
     )
 }

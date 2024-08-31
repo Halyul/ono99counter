@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import classes from './Home.module.scss'
 import Counter from '@/routes/components/Home/Counter'
 import Operation from '@/routes/components/Home/Operation'
 import CardDeck from '@/routes/components/Home/CardDeck'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
+import History from '@/routes/components/Home/History'
 
 export default function Home() {
   const [history, setHistory] = useState([0])
@@ -60,6 +63,7 @@ export default function Home() {
   return (
     <section className={classes.home}>
       <Counter history={history} onHistoryChange={setHistory} />
+      <History history={history} />
       <section className={classes.container}>
         <Operation
           history={history}

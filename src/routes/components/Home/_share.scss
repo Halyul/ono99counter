@@ -4,15 +4,7 @@
   grid-auto-rows: 4rem;
   gap: var(--btn-gap);
 
-  // .btn {
-  //   height: 5rem;
-  // }
-
-  // @media (max-width: 768px) {
-  //   max-width: 16rem;
-  //   .btn {
-  //     width: 4rem;
-  //     height: 4rem;
-  //   }
-  // }
+  @media only screen and (max-height: 720px) {
+    grid-auto-rows: 3rem;
+  }
 }

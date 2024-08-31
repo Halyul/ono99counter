@@ -12,21 +12,22 @@ export default [
     element: <Home />
   },
   {
-    path: "/about",
-    index: false,
-    name: "about",
-    element: <About />
-  },
-  {
     path: "/history",
     index: false,
     name: "history",
-    element: <History />
+    element: <History />,
+    className: "history"
   },
   {
     path: "/rules",
     index: false,
     name: "rules",
     element: <Rules />
+  },
+  {
+    path: "/about",
+    index: false,
+    name: "about",
+    element: <About />
   },
 ]

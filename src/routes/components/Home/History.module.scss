@@ -1,0 +1,10 @@
+.history {
+    width: 16rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--btn-gap);
+
+    @media only screen and (max-width: 100vh) {
+        display: none;
+    }
+}

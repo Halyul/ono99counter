@@ -1,4 +1,17 @@
 .counter {
     flex-grow: 1;
-    font-size: 5rem;
+    margin: auto 0;
+    font-size: 16rem;
+    text-align: center;
+    display: grid;
+
+    .counter-item {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: normal;
+    }
+
+    @media only screen and (max-height: 700px) {
+        font-size: 12rem;
+    }
 }
